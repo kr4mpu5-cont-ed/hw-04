@@ -20,8 +20,8 @@ var questions = [
         answer: "&quot;false&quot;"
       },
       {
-        title: "Functions may accept optional parameters when invoked. What is the term for the value passed to a function that is assigned to its parameter?",
-        choices: ["constant", "argument", "private", "debugger"],
-        answer: "argument"
+        title: "________ are passed to functions and assigned as parameters.",
+        choices: ["constants", "arguments", "privates", "debuggers"],
+        answer: "arguments"
       }
 ];

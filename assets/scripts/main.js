@@ -15,6 +15,8 @@ var questionDivChoice3 = document.getElementById("questionDivChoice3");
 var secondsLeft = 75;
 var currentQuestion = 0;
 var timerInterval;
+var timerFlashResult;
+var secondsLeftFlashResult = 2;
 const totalNumberQuestions = questions.length - 1; //0-based array
 
 function startQuiz() {
@@ -40,7 +42,7 @@ function startTimer() {
     if(secondsLeft === 0) {
         console.log("Time has run out.")
         clearInterval(timerInterval);
-        sendMessage();
+        endQuiz();
     }
 
   }, 1000);
@@ -64,14 +66,24 @@ function displayNextQuestion(int) {
 function checkResponse(str) {
     if (str == questions[currentQuestion].answer) {
         resultDiv.innerHTML = "Correct!";
-        resultDiv.setAttribute("style", "display");
-        //todo: only display briefly
     } else {
         secondsLeft = secondsLeft - 10;
+        if (secondsLeft < 0) {
+            secondsLeft = 0;
+        }
         resultDiv.innerHTML = "Incorrect!";
-        resultDiv.setAttribute("style", "display");
-        //todo: only display briefly
     }
+
+    resultDiv.setAttribute("style", "display");
+    timerFlashResult = setInterval(function() {
+        secondsLeftFlashResult--;
+        if (secondsLeftFlashResult === 0) {
+            resultDiv.setAttribute("style", "display: none");
+            clearInterval(timerFlashResult);
+        }    
+    }, 1000);
+    secondsLeftFlashResult = 2;
+
     if (currentQuestion < totalNumberQuestions) {
         currentQuestion++;
         displayNextQuestion();
@@ -79,20 +91,6 @@ function checkResponse(str) {
         endQuiz();
     }    
 }
-
-function pauseTimer() {
-    //invoke when "view highscores" clicked during quiz
-    //get secondsLeft
-    //clear interval
-}
-
-function sendMessage() {
-    // timeEl.textContent = " ";
-    // var imgEl = document.createElement("img");
-    // imgEl.setAttribute("src", "images/image_1.jpg");
-    // mainEl.appendChild(imgEl);
-    console.log("in sendMessage()")
-  }
 
 startButton.addEventListener("click", function() {
     startQuiz();
