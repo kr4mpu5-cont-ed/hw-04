@@ -27,29 +27,34 @@
             </nav>
 
             <div id="main">
-                <div id="startCard" style="display">
+                <div id="startDiv" style="display">
                     <h1>Coding Quiz Challenge</h1>
                     <p><strong>Try to answer the following questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</strong></p>
                     <button class="btn btn-primary btn-lg" id="start">Start Quiz</button>
                 </div>
-                <div id="questionCard" style="display: none">
-                    <h2 id="questionCardTitle"></h2>
-                    <button class="btn btn-outline-primary btn-lg" id="questionCardChoice0" data-choice=""></button>
-                    <button class="btn btn-outline-primary btn-lg" id="questionCardChoice1" data-choice=""></button>
-                    <button class="btn btn-outline-primary btn-lg" id="questionCardChoice2" data-choice=""></button>
-                    <button class="btn btn-outline-primary btn-lg" id="questionCardChoice3" data-choice=""></button>
+                <div id="questionDiv" style="display: none">
+                    <h2 id="questionDivTitle"></h2>
+                    <button class="btn btn-outline-primary btn-lg" id="questionDivChoice0" data-choice=""></button>
+                    <button class="btn btn-outline-primary btn-lg" id="questionDivChoice1" data-choice=""></button>
+                    <button class="btn btn-outline-primary btn-lg" id="questionDivChoice2" data-choice=""></button>
+                    <button class="btn btn-outline-primary btn-lg" id="questionDivChoice3" data-choice=""></button>
                 </div>
-                <div id="resultCard" style="display: none">
+                <div id="resultDiv" style="display: none">
                     <hr />
-                    <h1></h1>
+                    <h3 id="resultText"></h3>
                 </div>
-                <div id="highscoresCard" style="display: none">
-                    <h1></h1>
+                <div id="gameOverDiv" style="display: none">
+                    <h3>Game over, man!</h3>
+                    Your final score is <span id="score"></span>.
+                    Enter initials [__]. [submit button]
+                </div>
+                <div id="highscoresDiv" style="display: none">
+                    <h3>high scores go here: </h3>
                 </div>
             </div>
     
-    <script src="assets/scripts/main.js"></script>     
     <script src="assets/scripts/questions.js"></script>
+    <script src="assets/scripts/main.js"></script>     
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -1,29 +1,38 @@
 var mainEl = document.getElementById("main");
 var timeEl = document.getElementById("time");
 var startButton = document.getElementById("start");
-var startCard = document.getElementById("startCard");
-var questionCard = document.getElementById("questionCard");
-var resultCard = document.getElementById("resultCard");
-var highscoresCard = document.getElementById("highscoresCard");
-var questionCardTitle = document.getElementById("questionCardTitle");
-var questionCardChoice0 = document.getElementById("questionCardChoice0");
-var questionCardChoice1 = document.getElementById("questionCardChoice1");
-var questionCardChoice2 = document.getElementById("questionCardChoice2");
-var questionCardChoice3 = document.getElementById("questionCardChoice3");
-// var timerRunning = false;
+var startDiv = document.getElementById("startDiv");
+var questionDiv = document.getElementById("questionDiv");
+var resultDiv = document.getElementById("resultDiv");
+var gameOverDiv = document.getElementById("gameOverDiv");
+var score = document.getElementById("score");
+var highscoresDiv = document.getElementById("highscoresDiv");
+var questionDivTitle = document.getElementById("questionDivTitle");
+var questionDivChoice0 = document.getElementById("questionDivChoice0");
+var questionDivChoice1 = document.getElementById("questionDivChoice1");
+var questionDivChoice2 = document.getElementById("questionDivChoice2");
+var questionDivChoice3 = document.getElementById("questionDivChoice3");
 var secondsLeft = 75;
 var currentQuestion = 0;
+var timerInterval;
+const totalNumberQuestions = questions.length - 1; //0-based array
 
 function startQuiz() {
     startTimer();
     displayNextQuestion(currentQuestion);
 }
 
-function startTimer() {
-    console.log("in startTimer()");
-    // timerRunning = true;
+function endQuiz() {
+    questionDiv.setAttribute("style", "display:none");
+    resultDiv.setAttribute("style", "display:none");
+    score.innerHTML = secondsLeft;
+    timeEl.textContent = "Time: " + secondsLeft;
+    gameOverDiv.setAttribute("style", "display:");
+    clearInterval(timerInterval);
+}
 
-    var timerInterval = setInterval(function() {
+function startTimer() {
+    timerInterval = setInterval(function() {
     secondsLeft--;
 
     timeEl.textContent = "Time: " + secondsLeft;
@@ -38,30 +47,37 @@ function startTimer() {
 }
 
 function displayNextQuestion(int) {
-    //which question am i on? >> need questionCounter
-    startCard.setAttribute("style", "display: none");
-    questionCard.setAttribute("style", "display");
+    startDiv.setAttribute("style", "display: none");
+    questionDiv.setAttribute("style", "display");
 
-    questionCardTitle.innerHTML = questions[currentQuestion].title;
-    questionCardChoice0.innerHTML = questions[currentQuestion].choices[0];
-    questionCardChoice0.setAttribute("data-choice", questions[currentQuestion].choices[0]);
-    questionCardChoice1.innerHTML = questions[currentQuestion].choices[1];
-    questionCardChoice1.setAttribute("data-choice", questions[currentQuestion].choices[1]);
-    questionCardChoice2.innerHTML = questions[currentQuestion].choices[2];
-    questionCardChoice2.setAttribute("data-choice", questions[currentQuestion].choices[2]);
-    questionCardChoice3.innerHTML = questions[currentQuestion].choices[3];
-    questionCardChoice3.setAttribute("data-choice", questions[currentQuestion].choices[3]);
+    questionDivTitle.innerHTML = questions[currentQuestion].title;
+    questionDivChoice0.innerHTML = questions[currentQuestion].choices[0];
+    questionDivChoice0.setAttribute("data-choice", questions[currentQuestion].choices[0]);
+    questionDivChoice1.innerHTML = questions[currentQuestion].choices[1];
+    questionDivChoice1.setAttribute("data-choice", questions[currentQuestion].choices[1]);
+    questionDivChoice2.innerHTML = questions[currentQuestion].choices[2];
+    questionDivChoice2.setAttribute("data-choice", questions[currentQuestion].choices[2]);
+    questionDivChoice3.innerHTML = questions[currentQuestion].choices[3];
+    questionDivChoice3.setAttribute("data-choice", questions[currentQuestion].choices[3]);
 }
 
 function checkResponse(str) {
-    console.log("Checking...");
     if (str == questions[currentQuestion].answer) {
-        console.log("ding ding ding!");
+        resultDiv.innerHTML = "Correct!";
+        resultDiv.setAttribute("style", "display");
+        //todo: only display briefly
+    } else {
+        secondsLeft = secondsLeft - 10;
+        resultDiv.innerHTML = "Incorrect!";
+        resultDiv.setAttribute("style", "display");
+        //todo: only display briefly
     }
-
-    //done processing current question, get ready for next
-    currentQuestion++;
-    displayNextQuestion();
+    if (currentQuestion < totalNumberQuestions) {
+        currentQuestion++;
+        displayNextQuestion();
+    } else {
+        endQuiz();
+    }    
 }
 
 function pauseTimer() {
@@ -82,39 +98,18 @@ startButton.addEventListener("click", function() {
     startQuiz();
 }); 
 
-questionCardChoice0.addEventListener("click", function() {
-    checkResponse(questionCardChoice0.getAttribute("data-choice"));
+questionDivChoice0.addEventListener("click", function() {
+    checkResponse(questionDivChoice0.getAttribute("data-choice"));
 });
 
-questionCardChoice1.addEventListener("click", function() {
-    checkResponse(questionCardChoice1.getAttribute("data-choice"));
+questionDivChoice1.addEventListener("click", function() {
+    checkResponse(questionDivChoice1.getAttribute("data-choice"));
 });
 
-questionCardChoice2.addEventListener("click", function() {
-    checkResponse(questionCardChoice2.getAttribute("data-choice"));
+questionDivChoice2.addEventListener("click", function() {
+    checkResponse(questionDivChoice2.getAttribute("data-choice"));
 });
 
-questionCardChoice3.addEventListener("click", function() {
-    checkResponse(questionCardChoice3.getAttribute("data-choice"));
+questionDivChoice3.addEventListener("click", function() {
+    checkResponse(questionDivChoice3.getAttribute("data-choice"));
 });
-
-
-//
-
-// var imageContainer = document.querySelector(".img-container");
-
-// imageContainer.addEventListener("click", function(event) {
-//   var element = event.target;
-
-//   if (element.matches("img")) {
-//     var state = element.getAttribute("data-state");
-
-//     if (state === "still") {
-//       element.setAttribute("data-state", "animate");
-//       element.setAttribute("src", element.getAttribute("data-animate"));
-//     } else if (state === "animate") {
-//       element.setAttribute("data-state", "still");
-//       element.setAttribute("src", element.getAttribute("data-still"));
-//     }
-//   }
-// });
