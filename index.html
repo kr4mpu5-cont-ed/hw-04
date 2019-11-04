@@ -5,67 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="assets/styles/bootstrap.min.css" /> <!-- bootstrap cyborg -- dark theme -->
+    <link rel="stylesheet" href="assets/styles/bootstrap.min.css" /> <!-- bootstrap sketchy theme -->
     <link rel="stylesheet" href="assets/styles/style.css" />
-    <title>Hello, world!</title>
+    <title>Coding Quiz Challenge</title>
   </head>
   <body>
 
         <div class="container">
 
-            <nav class="navbar navbar-expand-lg navbar-light ml-0 pl-0 mb-5">
-                <div id="highScores"><button class="btn btn-outline-primary">Highscores</button></div>
+            <nav id="navBar" class="navbar navbar-expand-lg navbar-light ml-0 pl-0 mb-5" style="visibility: block;">
+                <div id="highScores"><button id="viewHighscores" class="btn btn-outline-primary">Highscores</button></div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarText">
                     <span class="navbar-text-light">
-                        <span id="time">Time: 75</span>
+                        <span id="timeLeft">Time: 0</span>
                     </span>
                 
                 </div>
             </nav>
 
             <div id="main">
-                <div id="startDiv" style="display">
+                <div id="startDiv" style="display: block;">
                     <h1>Coding Quiz Challenge</h1>
                     <p><strong>Try to answer the following questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</strong></p>
                     <button class="btn btn-primary btn-lg" id="start">Start Quiz</button>
                 </div>
-                <div id="questionDiv" style="display: none">
+                <div id="questionDiv" style="display: none;">
                     <h2 id="questionDivTitle"></h2>
                     <button class="btn btn-outline-primary btn-lg" id="questionDivChoice0" data-choice=""></button>
                     <button class="btn btn-outline-primary btn-lg" id="questionDivChoice1" data-choice=""></button>
                     <button class="btn btn-outline-primary btn-lg" id="questionDivChoice2" data-choice=""></button>
                     <button class="btn btn-outline-primary btn-lg" id="questionDivChoice3" data-choice=""></button>
                 </div>
-                <div class="mt-3" id="resultDiv" style="display: none">
+                <div id="resultDiv" class="mt-3" style="display: none">
                     <hr class="result" />
                     <h3 id="resultText"></h3>
                 </div>
                 <div id="gameOverDiv" style="display: none">
-                    <h3>Game over, man!</h3>
+                    <h1>Game over, man!</h1>
                     <p>Your final score is <span id="score"></span>.</p>
 
                     <form class="form-inline">
-                        <div class="form-row align-items-center">
-                            <div class="col-auto">
-                                <div class="form-check mb-2">
-                                    <label class="form-control-label mb-2" for="autoSizingCheck"><p>Enter initials:</p></label> 
-                                    <input class="form-control" type="text" id="autoSizingCheck">
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                            </div>
+                        <div class="form-group mb-2">
+                            Enter initials:
                         </div>
-                    </form>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="playerInitials" class="sr-only">Enter initials:</label>
+                            <input type="text" class="form-control" id="playerInitials" placeholder="Initials">
+                        </div>
+                        <button id="submitScore" type="submit" class="btn btn-primary mb-2">Submit</button>
+                    </form>                    
                 </div>
                 <div id="highscoresDiv" style="display: none">
-                    <h3>high scores go here: </h3>
+                    <h1>Highscores</h1>
+                    <ul id="highScoreList"></ul>
+                    <form class="form-inline">
+                        <button id="startOver" type="submit" class="btn btn-primary mb-2">Start Over</button>&nbsp;&nbsp;&nbsp;
+                        <button id="clearHighscores" type="submit" class="btn btn-primary mb-2">Clear Highscores</button>
+                    </form>                        
                 </div>
             </div>
     
+        </div>
+
     <script src="assets/scripts/questions.js"></script>
     <script src="assets/scripts/main.js"></script>     
 
